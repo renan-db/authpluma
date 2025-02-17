@@ -1,0 +1,87 @@
+# Binários compilados e executáveis
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+bin/
+build/
+
+# Arquivos de teste
+*.test
+*.tmp
+coverage.out
+coverage.html
+
+# Arquivos de IDE e editores
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Dependências e módulos
+vendor/
+/go.sum
+
+# Arquivos de ambiente e configuração
+.env
+.env.local
+.env.*.local
+*.env
+config.yaml
+config.yml
+config.local.*
+
+# Arquivos de log
+*.log
+logs/
+log/
+
+# Arquivos temporários
+tmp/
+temp/
+.tmp/
+
+# Arquivos de certificado e chaves
+*.pem
+*.key
+*.crt
+*.csr
+*.cert
+
+# Arquivos de cache
+.cache/
+
+# Arquivos de banco de dados local
+*.db
+*.sqlite
+*.sqlite3
+
+# Arquivos de debug
+debug
+__debug_bin
+
+# Arquivos específicos do sistema operacional
+Thumbs.db
+.DS_Store
+.directory
+
+# Diretórios de output
+out/
+dist/
+
+# Arquivos de documentação gerados
+docs/_site/
+docs/api/
+
+# Arquivos de dependência específicos do projeto
+node_modules/
+package-lock.json
+yarn.lock
+
+# Arquivos de métricas e profiling
+*.prof
+*.trace
+*.out 
