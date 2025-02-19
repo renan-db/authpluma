@@ -26,8 +26,8 @@ vendor/
 /go.sum
 
 # Arquivos de ambiente e configuração
-.env
-.env.local
+.env-dev
+.env.prod
 .env.*.local
 *.env
 config.yaml

@@ -1,6 +1,10 @@
 "# authpluma" 
 Autenticador centralizado desenvolvido em Go com foco em escalabilidade e segurança.
 
+## Endpoints
+
+- `http://localhost:8080/` - Página inicial, execução local.
+
 ## Funcionalidades
 
 - Autenticação de usuários
@@ -14,3 +18,7 @@ Autenticador centralizado desenvolvido em Go com foco em escalabilidade e segura
 - `go test ./...` Executa os testes do projeto.
 - `go build -o app ./cmd/api` Compila a aplicação.
 - `go list -u -m all` Lista as dependências desatualizadas.
+
+- `go run cmd/api/main.go dev` Desenvolvimento (usa .env.dev)
+- `go run cmd/api/main.go prod` Produção (usa .env.prod)
+- `go run cmd/api/main.go test` Teste (usa .env.test)
