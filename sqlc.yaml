@@ -1,0 +1,8 @@
+version: "1"
+packages:
+  - path: "internal/db"
+    queries: "sqlc/queries/"
+    schema: "sqlc/schema/"
+    engine: "postgresql"
+    gen:
+      go: true 

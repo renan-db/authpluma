@@ -13,12 +13,8 @@ Autenticador centralizado desenvolvido em Go com foco em escalabilidade e segura
 
 ## Comandos Essenciais
 
-- `go mod tidy` Instala e organiza as dependências do projeto.
-- `go run ./cmd/api/main.go` Executa a aplicação.
-- `go test ./...` Executa os testes do projeto.
-- `go build -o app ./cmd/api` Compila a aplicação.
-- `go list -u -m all` Lista as dependências desatualizadas.
-
-- `go run cmd/api/main.go dev` Desenvolvimento (usa .env.dev)
-- `go run cmd/api/main.go prod` Produção (usa .env.prod)
-- `go run cmd/api/main.go test` Teste (usa .env.test)
+- `make`        - Exibe a lista de comandos disponíveis.
+- `make app`    - Executa a aplicação.
+- `make docker` - Executa os comandos Docker.
+- `make git`    - Executa os comandos Git.
+- `make go`     - Executa os comandos Go.
