@@ -18,6 +18,11 @@ git:
 	@echo "  git push                         - Envia commits para o repositório remoto"
 	@echo "  git pull                         - Atualiza o repositório local"
 	@echo
+	@echo "  git commit --amend -m 't' -m 'd' - Adiciona um novo titulo e descrição para o ultimo commit"
+	@echo "  git commit --amend               - Abre o editor de commit para editar o ultimo commit"
+	@echo "  esc :wq                          - Salva e sai do editor de commit"
+	@echo "  git log -1 --pretty=full         - Mostra o ultimo commit"
+	@echo
 	@echo "=== Branches ==="
 	@echo "  git branch                       - Lista todas as branches"
 	@echo "  git branch <nome>                - Cria uma nova branch"
