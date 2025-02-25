@@ -14,7 +14,3 @@ Autenticador centralizado desenvolvido em Go com foco em escalabilidade e segura
 ## Comandos Essenciais
 
 - `make`        - Exibe a lista de comandos disponíveis.
-- `make app`    - Executa a aplicação.
-- `make docker` - Executa os comandos Docker.
-- `make git`    - Executa os comandos Git.
-- `make go`     - Executa os comandos Go.

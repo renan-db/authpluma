@@ -1,40 +1,28 @@
 # Define todos os targets
-.PHONY: app app-help
+.PHONY: app app-help dev stop logs
 
 # Target app
 app:
 	@echo
 	@echo "=== APP ==="
 	@echo
-	@echo "  make help   - Exibe esta mensagem de ajuda"
-	@echo "  make dev    - Inicia o ambiente de desenvolvimento"
-	@echo "  make prod   - Inicia o ambiente de produção"
-	@echo "  make test   - Inicia o ambiente de teste"
-	@echo "  make stop   - Para e remove todos os containers"
+	@echo "  make dev        - Inicia os containers"
+	@echo "  make stop       - Para os containers"
+	@echo "  make logs       - Exibe logs dos containers"
+	@echo "  make remove-all - Remove todos os containers e volumes"
 	@echo
 
-# Inicia o ambiente de desenvolvimento
-# 1. Inicia os containers Docker em background (-d)
-# 2. Executa a aplicação em modo desenvolvimento
+# Inicia os containers
 dev:
-	GO_ENV=dev docker-compose up -d
-	go run cmd/api/main.go dev
+	docker-compose up -d
 
-# Inicia o ambiente de produção
-# 1. Inicia os containers Docker em background (-d)
-# 2. Executa a aplicação em modo produção
-prod:
-	GO_ENV=prod docker-compose up -d
-	go run cmd/api/main.go prod
-
-# Inicia o ambiente de teste
-# 1. Inicia os containers Docker em background (-d)
-# 2. Executa a aplicação em modo teste
-test:
-	GO_ENV=test docker-compose up -d
-	go run cmd/api/main.go test
-
-# Para e remove todos os containers
-# Útil para limpar o ambiente ou reiniciar do zero
+# Para os containers
 stop:
 	docker-compose down
+
+# Exibe logs dos containers
+logs:
+	docker-compose logs -f
+
+docker-remove-all:
+	docker system prune --all --volumes

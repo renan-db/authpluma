@@ -1,22 +1,31 @@
-# Etapa de construção
-FROM golang:1.20-alpine AS builder
+# Build stage
+FROM golang:1.22 AS builder
 
 WORKDIR /app
 
+# Copia os arquivos de dependência
 COPY go.mod go.sum ./
 RUN go mod download
 
+# Copia o código fonte
 COPY . .
 
-RUN go build -o /authpluma ./cmd/api
+# Compila a aplicação
+RUN CGO_ENABLED=0 GOOS=linux go build -o main ./cmd/api
 
-# Etapa final
+# Final stage
 FROM alpine:latest
 
-WORKDIR /root/
+WORKDIR /app
 
-COPY --from=builder /authpluma .
+# Adiciona certificados CA e timezone
+RUN apk --no-cache add ca-certificates tzdata
 
-EXPOSE 8080
+# Copia o binário compilado
+COPY --from=builder /app/main .
 
-CMD ["./authpluma"] 
+# Usa a variável de ambiente para a porta
+EXPOSE ${APP_PORT}
+
+# Executa a aplicação
+CMD ["./main"] 

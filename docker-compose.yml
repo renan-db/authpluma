@@ -4,8 +4,6 @@ services:
   db:
     image: postgres:15
     restart: always
-    env_file: 
-      - .env.${GO_ENV}
     environment:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
@@ -20,9 +18,11 @@ services:
     depends_on:
       - db
     environment:
-      DATABASE_URL: ${DB_URL}
+      DB_URL: ${DB_URL}
+    volumes:
+      - ./.env:/app/.env
     ports:
-      - "${APP_PORT}:8080"
+      - "${APP_PORT}:${APP_PORT}"
 
 volumes:
   db_data: 
