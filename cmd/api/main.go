@@ -4,6 +4,8 @@ import (
 	"log"
 	"project/internal/infrastructure/config"
 	"project/internal/infrastructure/server"
+
+	"github.com/labstack/echo/v4"
 )
 
 func main() {
@@ -12,8 +14,11 @@ func main() {
 		log.Fatalf("Failed to load configuration: %v", err)
 	}
 
-	// Inicializa o servidor HTTP
-	if err := server.StartHTTPServer(); err != nil {
+	// Cria uma nova instância do Echo
+	e := echo.New()
+
+	// Inicializa o servidor HTTP com Echo
+	if err := server.StartHTTPServer(e); err != nil {
 		log.Fatalf("Failed to start server: %v", err)
 	}
 } 
