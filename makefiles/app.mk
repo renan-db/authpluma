@@ -1,8 +1,8 @@
 # Define todos os targets
-.PHONY: app app-help dev stop logs
+.PHONY: app app-help dev stop logs sqlc
 
 # Target app
-app:
+app: sqlc dev
 	@echo
 	@echo "=== APP ==="
 	@echo
@@ -26,3 +26,7 @@ logs:
 
 docker-remove-all:
 	docker system prune --all --volumes
+
+# Gera código do SQLC
+sqlc:
+	sqlc generate

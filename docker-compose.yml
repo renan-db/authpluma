@@ -12,17 +12,24 @@ services:
       - db_data:/var/lib/postgresql/data
     ports:
       - "${DB_PORT}:${DB_PORT}"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
   app:
     build: .
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     environment:
       DB_URL: ${DB_URL}
     volumes:
       - ./.env:/app/.env
     ports:
       - "${APP_PORT}:${APP_PORT}"
+    command: sh -c "migrate -path /app/internal/infrastructure/database/migration -database \"${DB_URL}\" up && /app/main"
 
 volumes:
-  db_data: 
+  db_data:

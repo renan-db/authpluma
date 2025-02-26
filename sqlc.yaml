@@ -1,8 +1,12 @@
-version: "1"
-packages:
-  - path: "internal/db"
-    queries: "sqlc/queries/"
-    schema: "sqlc/schema/"
-    engine: "postgresql"
+version: "2"
+sql:
+  - engine: "postgresql"
+    queries: "internal/infrastructure/database/query/"
+    schema: "internal/infrastructure/database/migration/"
     gen:
-      go: true 
+      go:
+        package: "database"
+        out: "internal/infrastructure/database/sqlc"
+        emit_json_tags: true
+        emit_prepared_queries: true
+        emit_interface: true 
