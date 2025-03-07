@@ -1,13 +1,13 @@
 # Define todos os targets
-.PHONY: sw sw-help
+.PHONY: sw
 
 # Target swagger
 sw:
 	@echo "=== SWAGGER ==="
 	@echo
-	@echo "  make sw-docs - Gera documentacao do swagger"
+	@echo "  swag init -g cmd/api/main.go --output docs/swagger  - Gera documentação do Swagger dentro da pasta docs/swagger"
 	@echo
 
-# Inicia os containers
+# Gera a documentação do Swagger
 sw-docs:
 	swag init -g cmd/api/main.go --output docs/swagger

@@ -1,5 +1,5 @@
 # Define todos os targets
-.PHONY: setup setup-help setup-linux
+.PHONY: setup
 
 # Target setup help
 setup:
@@ -10,6 +10,20 @@ setup:
 
 # Instala dependências no Linux
 setup-linux:
+	@echo "=== VOCÊ ESTÁ PRESTES: ==="
+	@echo
+	@echo "- Atualizar os pacotes do Linux"
+	@echo "- Instalar Docker e Docker Compose"
+	@echo "- Instalar Go e configurar GOPATH"
+	@echo "- Instalar Swagger"
+	@echo "- Configurar permissões do Docker"
+	@echo
+	@read -p "Deseja prosseguir? (y/n) " answer; \
+	if [ "$$answer" != "y" ]; then \
+		echo "Operação cancelada"; \
+		exit 1; \
+	fi
+	
 	@echo "=== Instalando dependências no Linux ==="
 	@echo "1. Atualizando pacotes..."
 	sudo apt update
