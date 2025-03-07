@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	_ "project/docs/swagger" // importa documentação swagger
 	handler "project/internal/delivery/http/handler"
 	"project/internal/delivery/http/routes"
 	"project/internal/infrastructure/config"
@@ -9,6 +10,7 @@ import (
 	sqlc "project/internal/infrastructure/database/sqlc"
 
 	"github.com/labstack/echo/v4"
+	echoSwagger "github.com/swaggo/echo-swagger"
 )
 
 func main() {
@@ -35,13 +37,16 @@ func main() {
 	defer db.Close()
 
 	// Inicializa queries
-	queries := sqlc.New(db)	
+	queries := sqlc.New(db)
 
 	// Inicializa handlers
 	userHandler := handler.NewUserHandler(queries)
 
 	// Cria uma nova instância do Echo
 	e := echo.New()
+
+	// Adiciona rota do Swagger
+	e.GET("/swagger/*", echoSwagger.WrapHandler)
 
 	// Registra rotas
 	routes.RegisterUserRoutes(e, userHandler)
