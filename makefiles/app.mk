@@ -1,8 +1,8 @@
 # Define todos os targets
-.PHONY: app app-help dev stop logs sqlc
+.PHONY: app
 
 # Target app
-app: sqlc dev
+app:
 	@echo
 	@echo "=== APP ==="
 	@echo
