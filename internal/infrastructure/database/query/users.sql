@@ -6,7 +6,7 @@ INSERT INTO users (
     $1, $2
 ) RETURNING *;
 
--- name: GetUser :one
+-- name: GetUserById :one
 SELECT * FROM users
 WHERE id = $1 LIMIT 1;
 
@@ -24,4 +24,4 @@ RETURNING *;
 
 -- name: DeleteUser :exec
 DELETE FROM users
-WHERE id = $1; 
+WHERE id = $1;

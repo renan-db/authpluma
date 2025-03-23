@@ -5,8 +5,8 @@
 setup:
 	@echo "=== SETUP ==="
 	@echo
-	@echo "  make setup-linux - Instala dependências necessárias no Linux"
-	@echo
+	@echo "make setup-linux   - Instala e configura um ambiente de desenvolvimento em linux"
+	@ech
 
 # Instala dependências no Linux
 setup-linux:

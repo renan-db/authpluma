@@ -15,7 +15,7 @@ INSERT INTO users (
     email
 ) VALUES (
     $1, $2
-) RETURNING id, name, email, created_at, updated_at
+) RETURNING id, name, email, created_at, deleted_at, updated_at, inatived_at
 `
 
 type CreateUserParams struct {
@@ -31,7 +31,9 @@ func (q *Queries) CreateUser(ctx context.Context, arg CreateUserParams) (User, e
 		&i.Name,
 		&i.Email,
 		&i.CreatedAt,
+		&i.DeletedAt,
 		&i.UpdatedAt,
+		&i.InativedAt,
 	)
 	return i, err
 }
@@ -46,26 +48,28 @@ func (q *Queries) DeleteUser(ctx context.Context, id int32) error {
 	return err
 }
 
-const getUser = `-- name: GetUser :one
-SELECT id, name, email, created_at, updated_at FROM users
+const getUserById = `-- name: GetUserById :one
+SELECT id, name, email, created_at, deleted_at, updated_at, inatived_at FROM users
 WHERE id = $1 LIMIT 1
 `
 
-func (q *Queries) GetUser(ctx context.Context, id int32) (User, error) {
-	row := q.queryRow(ctx, q.getUserStmt, getUser, id)
+func (q *Queries) GetUserById(ctx context.Context, id int32) (User, error) {
+	row := q.queryRow(ctx, q.getUserByIdStmt, getUserById, id)
 	var i User
 	err := row.Scan(
 		&i.ID,
 		&i.Name,
 		&i.Email,
 		&i.CreatedAt,
+		&i.DeletedAt,
 		&i.UpdatedAt,
+		&i.InativedAt,
 	)
 	return i, err
 }
 
 const listUsers = `-- name: ListUsers :many
-SELECT id, name, email, created_at, updated_at FROM users
+SELECT id, name, email, created_at, deleted_at, updated_at, inatived_at FROM users
 ORDER BY id
 `
 
@@ -83,7 +87,9 @@ func (q *Queries) ListUsers(ctx context.Context) ([]User, error) {
 			&i.Name,
 			&i.Email,
 			&i.CreatedAt,
+			&i.DeletedAt,
 			&i.UpdatedAt,
+			&i.InativedAt,
 		); err != nil {
 			return nil, err
 		}
@@ -104,7 +110,7 @@ SET name = $2,
     email = $3,
     updated_at = CURRENT_TIMESTAMP
 WHERE id = $1
-RETURNING id, name, email, created_at, updated_at
+RETURNING id, name, email, created_at, deleted_at, updated_at, inatived_at
 `
 
 type UpdateUserParams struct {
@@ -121,7 +127,9 @@ func (q *Queries) UpdateUser(ctx context.Context, arg UpdateUserParams) (User, e
 		&i.Name,
 		&i.Email,
 		&i.CreatedAt,
+		&i.DeletedAt,
 		&i.UpdatedAt,
+		&i.InativedAt,
 	)
 	return i, err
 }

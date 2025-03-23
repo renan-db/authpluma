@@ -3,11 +3,11 @@ package main
 import (
 	"log"
 	_ "project/docs/swagger" // importa documentação swagger
-	handler "project/internal/delivery/http/handler"
-	"project/internal/delivery/http/routes"
 	"project/internal/infrastructure/config"
 	"project/internal/infrastructure/database"
 	sqlc "project/internal/infrastructure/database/sqlc"
+	handler "project/internal/modules/user/handle"
+	routes "project/internal/modules/user/route"
 
 	"github.com/labstack/echo/v4"
 	echoSwagger "github.com/swaggo/echo-swagger"

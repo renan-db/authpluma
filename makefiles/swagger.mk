@@ -5,9 +5,9 @@
 sw:
 	@echo "=== SWAGGER ==="
 	@echo
-	@echo "  swag init -g cmd/api/main.go --output docs/swagger  - Gera documentação do Swagger dentro da pasta docs/swagger"
+	@echo "  sw-docs - Gera documentação do Swagger dentro da pasta docs/swagger"
 	@echo
 
 # Gera a documentação do Swagger
 sw-docs:
-	swag init -g cmd/api/main.go --output docs/swagger
+	swag init -g ./cmd/api/main.go --output ./docs/swagger

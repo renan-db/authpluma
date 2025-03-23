@@ -1,5 +1,5 @@
 # Build stage
-FROM golang:1.22-alpine AS builder
+FROM golang:1.24-alpine AS builder
 
 WORKDIR /app
 
@@ -39,4 +39,4 @@ RUN chmod +x /app/main
 EXPOSE 8080
 
 # Executa a aplicação
-CMD ["/app/main"] 
+CMD ["/app/main"]
