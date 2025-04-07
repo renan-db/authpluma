@@ -10,6 +10,7 @@ type UserCRUD interface {
 	CreateUser(ctx context.Context, user *entity.UserEntity) error
 	DeleteUser(ctx context.Context, id int32) error
 	GetUserById(ctx context.Context, id int32) (*entity.UserEntity, error)
+	GetUserByEmail(ctx context.Context, email string) (*entity.UserEntity, error)
 	UpdateUser(ctx context.Context, user *entity.UserEntity) error
 	ListUsers(ctx context.Context) ([]entity.UserEntity, error)
 }
