@@ -54,6 +54,7 @@ dev-build:
 
 dev-docker-run:
 	@echo "$(YELLOW)Gerando imagem Docker...$(RESET)"
+	# docker-compose build --no-cache app
 	docker-compose up -d
 
 # Para os containers
@@ -66,6 +67,9 @@ logs:
 
 # Remove todos os containers e volumes
 remove:
+	docker-compose down -v
+
+remove-all:
 	docker-compose down
 	docker system prune --all --volumes
 

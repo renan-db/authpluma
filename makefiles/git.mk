@@ -16,4 +16,5 @@ git:
 	@echo "  git merge <branch>           - Mescla uma branch com a atual"
 	@echo "  git commit --amend           - Abre o editor para editar o último commit"
 	@echo "  git log -1 --pretty=full     - Mostra os detalhes do último commit"
+	@echo "  git rm -r --cached <path>    - Remove arquivos versionados"
 	@echo

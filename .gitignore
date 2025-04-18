@@ -8,7 +8,8 @@ bin/
 build/
 
 # Arquivos gerados localmente através de comandos
-/internal/infrastructure/database/sqlc/
+internal/infrastructure/database/sqlc/
+
 
 # Arquivos de teste
 *.test

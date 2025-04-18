@@ -2,12 +2,14 @@ package main
 
 import (
 	"log"
-	_ "project/docs/swagger" // importa documentação swagger
+	_ "project/docs/swagger"
 	"project/internal/infrastructure/config"
 	"project/internal/infrastructure/database"
-	sqlc "project/internal/infrastructure/database/sqlc"
-	handler "project/internal/modules/user/handle"
-	routes "project/internal/modules/user/route"
+
+	"project/internal/modules/user/handler"
+	userRepo "project/internal/modules/user/repository/postgre_sql"
+	"project/internal/modules/user/route"
+	"project/internal/modules/user/usecase"
 
 	"github.com/labstack/echo/v4"
 	echoSwagger "github.com/swaggo/echo-swagger"
@@ -36,20 +38,18 @@ func main() {
 	}
 	defer db.Close()
 
-	// Inicializa queries
-	queries := sqlc.New(db)
-
-	// Inicializa handlers
-	userHandler := handler.NewUserHandler(queries)
-
 	// Cria uma nova instância do Echo
 	e := echo.New()
 
 	// Adiciona rota do Swagger
 	e.GET("/swagger/*", echoSwagger.WrapHandler)
 
-	// Registra rotas
-	routes.RegisterUserRoutes(e, userHandler)
+	userRepositories := userRepo.NewUserRepositories(db)
+	userUseCases := usecase.NewUserUseCases(userRepositories)
+	userHandles := handler.NewUserHandlers(userUseCases)
+
+	userRoutes := route.NewUserRoutes(userHandles)
+	userRoutes.RegisterRoutes(e)
 
 	// Inicializa o servidor HTTP com Echo
 	if err := e.Start(":8080"); err != nil {

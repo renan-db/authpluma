@@ -6,7 +6,7 @@ import (
 
 type CreateUserRequestDTO struct {
 	entity.UserEntity `json:"-"`
-	Name       string `json:"user" validate:"required,min=3" example:"John Doe"`
+	Name       string `json:"name" validate:"required,min=3" example:"John Doe"`
 	Email      string `json:"email" validate:"required,email" example:"john@example.com"`
 }
 
@@ -28,6 +28,6 @@ type ListUserRequestDTO struct {
 type UpdateUserRequestDTO struct {
 	entity.UserEntity `json:"-"`
 	ID         int    `json:"id" validate:"required"`
-	Name       string `json:"user" validate:"required, min=3"`
+	Name       string `json:"name" validate:"required, min=3"`
 	Email      string `json:"email" validate:"required, email"`
 }
