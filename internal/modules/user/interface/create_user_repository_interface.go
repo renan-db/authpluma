@@ -5,6 +5,6 @@ import (
 	"project/internal/modules/user/entity"
 )
 
-type CreateUserRepositoryInterface interface {
+type CreateUserRepository interface {
 	Execute(ctx context.Context, user *entity.UserEntity) (*entity.UserEntity, error)
 }

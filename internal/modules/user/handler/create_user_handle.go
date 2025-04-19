@@ -3,56 +3,63 @@ package handler
 import (
 	"net/http"
 
-	"project/internal/modules/user/dto"
-	"project/internal/modules/user/entity"
-	"project/internal/modules/user/helper"
-	interfaces "project/internal/modules/user/interface"
-
 	"github.com/labstack/echo/v4"
+
+	userDto "project/internal/modules/user/dto"
+	userEntity "project/internal/modules/user/entity"
+	bindHelper "project/internal/modules/user/helper/bind"
+	validateHelper "project/internal/modules/user/helper/validate"
+	userInterfaces "project/internal/modules/user/interface"
 )
 
 // Garante que a struct implemente a interface esperada
-var _ interfaces.CreateUserHandlerInterface = (*createUserHandler)(nil)
+var _ userInterfaces.CreateUserHandlerInterface = (*createUserHandler)(nil)
 
 // Representa o caso de uso com a dependência externa injetada
 type createUserHandler struct {
-	useCase interfaces.CreateUserUseCaseInterface
+	useCase userInterfaces.CreateUserUseCaseInterface
 }
 
 // Cria uma nova instância com a dependência necessária
-func NewCreateUserHandler(uc interfaces.CreateUserUseCaseInterface) *createUserHandler {
+func NewCreateUserHandler(uc userInterfaces.CreateUserUseCaseInterface) *createUserHandler {
 	return &createUserHandler{
 		useCase: uc,
 	}
 }
 
-// Executa a lógica principal com a dependência fornecida
+// Implementa o caso de uso para criar um usuário
 func (h *createUserHandler) Execute(c echo.Context) error {
-	var req dto.CreateUserRequestDTO
-	
-	if err := helper.BindRequest(c, &req); err != nil {
+	var req userDto.CreateUserRequestDTO
+
+	// Bind request
+	binder := bindHelper.NewBinder(c)
+	if err := binder.Binder(&req); err != nil {
+		return c.JSON(http.StatusBadRequest, map[string]string{
+			"error": err.Error(),
+		})
+	}
+
+	// Validate Struct request
+	validateStruct := validateHelper.NewValidateStruct()
+	if err := validateStruct.Validate(&req); err != nil {
 		return c.JSON(http.StatusBadRequest, map[string]string{"error": err.Error()})
 	}
 
-	if err := helper.ValidateStruct(&req); err != nil {
-		return c.JSON(http.StatusBadRequest, map[string]string{"error": err.Error()}) 
-	}
-
 	// Mapear DTO para Entidade
-	userEntity := &entity.UserEntity{
+	userEntityDto := &userEntity.UserEntity{
 		Name:  req.Name,
 		Email: req.Email,
 	}
 
 	// Chamar a useCase para criar o usuário
-	createdUserEntity, err := h.useCase.Execute(c.Request().Context(), userEntity)
+	createdUserEntity, err := h.useCase.Execute(c.Request().Context(), userEntityDto)
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, map[string]string{"error": err.Error()})
 	}
 
-	response := dto.CreateUserResponseDTO{
-		UserEntity: entity.UserEntity{
-			ID:        createdUserEntity.ID,
+	response := userDto.CreateUserResponseDTO{
+		UserEntity: userEntity.UserEntity{
+			ID:        createdUserEntity.ID,	
 			Name:      createdUserEntity.Name,
 			Email:     createdUserEntity.Email,
 			CreatedAt: createdUserEntity.CreatedAt,

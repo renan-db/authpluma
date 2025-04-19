@@ -6,10 +6,7 @@ import (
 	"project/internal/infrastructure/config"
 	"project/internal/infrastructure/database"
 
-	"project/internal/modules/user/handler"
-	userRepo "project/internal/modules/user/repository/postgre_sql"
-	"project/internal/modules/user/route"
-	"project/internal/modules/user/usecase"
+	app "project/internal/infrastructure/app"
 
 	"github.com/labstack/echo/v4"
 	echoSwagger "github.com/swaggo/echo-swagger"
@@ -44,12 +41,8 @@ func main() {
 	// Adiciona rota do Swagger
 	e.GET("/swagger/*", echoSwagger.WrapHandler)
 
-	userRepositories := userRepo.NewUserRepositories(db)
-	userUseCases := usecase.NewUserUseCases(userRepositories)
-	userHandles := handler.NewUserHandlers(userUseCases)
-
-	userRoutes := route.NewUserRoutes(userHandles)
-	userRoutes.RegisterRoutes(e)
+	// Gegistra os módulos
+	app.RegisterModules(e, db)
 
 	// Inicializa o servidor HTTP com Echo
 	if err := e.Start(":8080"); err != nil {

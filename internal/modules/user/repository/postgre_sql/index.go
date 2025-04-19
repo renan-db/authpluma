@@ -2,12 +2,13 @@ package repository
 
 import (
 	"database/sql"
-	userInterface "project/internal/modules/user/interface"
+
+	userinterfaces "project/internal/modules/user/interface"
 )
 
 // Agrupa todos os repositórios do usuário
 type UserRepositories struct{
-	Create userInterface.CreateUserRepositoryInterface
+	Create userinterfaces.CreateUserRepository
 }
 
 // Cria uma nova instância de todos os repositórios do usuário

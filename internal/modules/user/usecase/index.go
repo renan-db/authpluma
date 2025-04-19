@@ -1,13 +1,13 @@
 package usecase
 
 import (
-	interfaces "project/internal/modules/user/interface"
+	userInterfaces "project/internal/modules/user/interface"
 	repository "project/internal/modules/user/repository/postgre_sql"
 )
 
 // Agrupa todos os caso de uso do módulo
 type UserUseCases struct {
-	Create interfaces.CreateUserUseCaseInterface
+	Create userInterfaces.CreateUserUseCaseInterface
 }
 
 // Cria uma nova instância de todos os casos de uso do módulo

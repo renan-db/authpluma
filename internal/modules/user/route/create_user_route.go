@@ -3,19 +3,19 @@ package route
 import (
 	"github.com/labstack/echo/v4"
 
-	interfaces "project/internal/modules/user/interface"
+	userInterfaces "project/internal/modules/user/interface"
 )
 
 // Garante que a struct implemente a interface esperada
-var _ interfaces.CreateUserRouteInterface = (*createUserRoute)(nil)
+var _ userInterfaces.CreateUserRouteInterface = (*createUserRoute)(nil)
 
 // Representa o caso de uso com a dependência externa injetada
 type createUserRoute struct {
-	createUserHandler interfaces.CreateUserHandlerInterface
+	createUserHandler userInterfaces.CreateUserHandlerInterface
 }
 
 // Cria uma nova instância com a dependência necessária
-func NewCreateUserRoute(ch interfaces.CreateUserHandlerInterface) interfaces.CreateUserRouteInterface{
+func NewCreateUserRoute(ch userInterfaces.CreateUserHandlerInterface) userInterfaces.CreateUserRouteInterface{
 	return &createUserRoute{
 		createUserHandler: ch,
 	}
