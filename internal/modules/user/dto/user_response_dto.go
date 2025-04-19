@@ -1,30 +1,31 @@
 package dto
 
 import (
-	"project/internal/modules/user/entity"
 	"time"
+
+	userEntity "project/internal/modules/user/entity"
 )
 
 type CreateUserResponseDTO struct {
-	entity.UserEntity
+	userEntity.UserEntity
 	UpdatedAt time.Time `json:"-"`
 	InativedAt time.Time `json:"-"`
 	DeletedAt time.Time `json:"-"`
 }
 
 type DeleteUserResponseDTO struct {
-	entity.UserEntity
+	userEntity.UserEntity
 	ID         int32  `json:"id"`
 	Message    string `json:"message"`
 }
 
 type GetByIDUserResponseDTO struct {
-	entity.UserEntity
+	userEntity.UserEntity
 	DeletedAt time.Time `json:"-"`
 }
 
 type user struct {
-	entity.UserEntity
+	userEntity.UserEntity
 	DeletedAt time.Time `json:"-"`
 }
 
@@ -33,6 +34,6 @@ type ListUserResponseDTO struct {
 }
 
 type UpdateUserResponseDTO struct {
-	entity.UserEntity
+	userEntity.UserEntity
 	DeletedAt time.Time `json:"-"`
 }
