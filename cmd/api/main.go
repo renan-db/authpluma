@@ -6,7 +6,7 @@ import (
 	"project/internal/infrastructure/config"
 	"project/internal/infrastructure/database"
 
-	app "project/internal/infrastructure/app"
+	userModule "project/internal/modules/user"
 
 	"github.com/labstack/echo/v4"
 	echoSwagger "github.com/swaggo/echo-swagger"
@@ -42,7 +42,7 @@ func main() {
 	e.GET("/swagger/*", echoSwagger.WrapHandler)
 
 	// Gegistra os módulos
-	app.RegisterModules(e, db)
+	userModule.Register(e, db)
 
 	// Inicializa o servidor HTTP com Echo
 	if err := e.Start(":8080"); err != nil {

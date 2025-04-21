@@ -11,10 +11,13 @@ type Config struct {
 	DBUser     string `mapstructure:"DB_USER"`
 	DBPassword string `mapstructure:"DB_PASSWORD"`
 	DBName     string `mapstructure:"DB_NAME"`
+	UserRepositoryType string `mapstructure:"USER_REPOSITORY_TYPE"`
 }
 
 // Carrega as variáveis de ambiente com viper
 func LoadConfig() (*Config, error) {
+	viper.SetDefault("USER_REPOSITORY_TYPE", "postgres")
+	
 	viper.SetConfigFile(".env")
 	viper.AutomaticEnv()
 
