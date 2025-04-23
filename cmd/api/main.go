@@ -48,4 +48,4 @@ func main() {
 	if err := e.Start(":8080"); err != nil {
 		log.Fatalf("Failed to start server: %v", err)
 	}
-} 
+}

@@ -20,7 +20,7 @@ func Register(e *echo.Echo, db *sql.DB) {
 		Postgres: db,
 	}
 
-	userRepositories, err:= userRepo.NewUserRepository(repoType, dbConnections)
+	userRepositories, err := userRepo.NewUserRepository(repoType, dbConnections)
 	if err != nil {
 		fmt.Printf("Failed to create user repository: %v", err)
 	}

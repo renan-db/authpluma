@@ -29,7 +29,7 @@ func NewUserRepository(repoType string, conns DBConnections) (userinterfaces.Use
 		}
 
 		return postgresrepo.NewUserRepositoryPostgre(conns.Postgres), nil
-		
+
 	default:
 		return nil, fmt.Errorf("repository factory: tipo de repositório desconhecido ou não suportado: %s", repoType)
 	}

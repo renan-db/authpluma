@@ -8,15 +8,15 @@ import (
 
 type CreateUserResponseDTO struct {
 	userEntity.UserEntity
-	UpdatedAt time.Time `json:"-"`
+	UpdatedAt  time.Time `json:"-"`
 	InativedAt time.Time `json:"-"`
-	DeletedAt time.Time `json:"-"`
+	DeletedAt  time.Time `json:"-"`
 }
 
 type DeleteUserResponseDTO struct {
 	userEntity.UserEntity
-	ID         int32  `json:"id"`
-	Message    string `json:"message"`
+	ID      int32  `json:"id"`
+	Message string `json:"message"`
 }
 
 type GetByIDUserResponseDTO struct {

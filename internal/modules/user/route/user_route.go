@@ -15,7 +15,7 @@ type userRoute struct {
 }
 
 // Cria uma nova instância com a dependência necessária
-func NewUserRoute(ch userInterfaces.UserHandle) userInterfaces.UserRoute{
+func NewUserRoute(ch userInterfaces.UserHandle) userInterfaces.UserRoute {
 	return &userRoute{
 		userHandler: ch,
 	}

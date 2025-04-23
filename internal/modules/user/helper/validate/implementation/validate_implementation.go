@@ -9,7 +9,7 @@ import (
 )
 
 // Garante que a struct implemente a interface esperada
-var _ validateStructInterfaces.ValidateStruct = (*RequestValidateStruct)(nil)	
+var _ validateStructInterfaces.ValidateStruct = (*RequestValidateStruct)(nil)
 
 // Representa o validador com o validator
 type RequestValidateStruct struct {
@@ -24,9 +24,9 @@ func NewRequestValidateStruct() *RequestValidateStruct {
 }
 
 // Implementa o validador com o validator
-func (v *RequestValidateStruct) Validate(req interface{}) error {	
+func (v *RequestValidateStruct) Validate(req interface{}) error {
 	if err := v.validate.Struct(req); err != nil {
-		return fmt.Errorf("validation failed: %w", err)	
+		return fmt.Errorf("validation failed: %w", err)
 	}
 
 	return nil

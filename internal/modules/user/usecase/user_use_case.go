@@ -29,6 +29,6 @@ func (u *userUseCase) Create(ctx context.Context, user *userEntity.UserEntity) (
 	if err != nil {
 		return nil, fmt.Errorf("createUserUseCase: erro ao criar usuário no repositório: %w", err)
 	}
-	
+
 	return createdUser, nil
 }

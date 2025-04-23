@@ -59,7 +59,7 @@ func (h *userHandler) Create(c echo.Context) error {
 
 	response := userDto.CreateUserResponseDTO{
 		UserEntity: userEntity.UserEntity{
-			ID:        createdUserEntity.ID,	
+			ID:        createdUserEntity.ID,
 			Name:      createdUserEntity.Name,
 			Email:     createdUserEntity.Email,
 			CreatedAt: createdUserEntity.CreatedAt,

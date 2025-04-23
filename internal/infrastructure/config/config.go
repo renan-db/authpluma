@@ -6,18 +6,18 @@ import (
 
 // Mapea as variáveis de ambiente
 type Config struct {
-	DBHost     string `mapstructure:"DB_HOST"`
-	DBPort     string `mapstructure:"DB_PORT"`
-	DBUser     string `mapstructure:"DB_USER"`
-	DBPassword string `mapstructure:"DB_PASSWORD"`
-	DBName     string `mapstructure:"DB_NAME"`
+	DBHost             string `mapstructure:"DB_HOST"`
+	DBPort             string `mapstructure:"DB_PORT"`
+	DBUser             string `mapstructure:"DB_USER"`
+	DBPassword         string `mapstructure:"DB_PASSWORD"`
+	DBName             string `mapstructure:"DB_NAME"`
 	UserRepositoryType string `mapstructure:"USER_REPOSITORY_TYPE"`
 }
 
 // Carrega as variáveis de ambiente com viper
 func LoadConfig() (*Config, error) {
 	viper.SetDefault("USER_REPOSITORY_TYPE", "postgres")
-	
+
 	viper.SetConfigFile(".env")
 	viper.AutomaticEnv()
 
@@ -33,4 +33,4 @@ func LoadConfig() (*Config, error) {
 	}
 
 	return config, nil
-} 
+}

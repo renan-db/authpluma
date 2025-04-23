@@ -28,7 +28,7 @@ func NewUserRepositoryPostgre(db *sql.DB) userinterfaces.UserRepository {
 
 // Create implementa o método Create da interface UserRepository.
 func (r *userRepositoryPostgre) Create(ctx context.Context, user *entity.UserEntity) (*entity.UserEntity, error) {
-	
+
 	params := database.CreateUserParams{
 		Name:  user.Name,
 		Email: user.Email,
