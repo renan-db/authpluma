@@ -7,5 +7,5 @@ import (
 )
 
 type UserUseCase interface {
-	Create(ctx context.Context, user *entity.UserEntity) (*entity.UserEntity, error)
+	Create(ctx context.Context, user *entity.User) (*entity.User, error)
 }

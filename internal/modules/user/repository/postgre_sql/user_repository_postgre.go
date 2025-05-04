@@ -1,3 +1,4 @@
+// Package postgre_sql contém o repositório de usuário para PostgreSQL.
 package postgre_sql
 
 import (
@@ -27,27 +28,33 @@ func NewUserRepositoryPostgre(db *sql.DB) userinterfaces.UserRepository {
 }
 
 // Create implementa o método Create da interface UserRepository.
+<<<<<<< HEAD
 func (r *userRepositoryPostgre) Create(ctx context.Context, user *entity.UserEntity) (*entity.UserEntity, error) {
 
 	params := database.CreateUserParams{
+=======
+func (r *userRepositoryPostgre) Create(ctx context.Context, user *entity.User) (*entity.User, error) {
+	
+	paramsUserToCreate := database.CreateUserParams{
+>>>>>>> develop
 		Name:  user.Name,
 		Email: user.Email,
 	}
 
 	// Executa a querie gerada pelo sqlc
-	createdDbUser, err := r.userQueries.CreateUser(ctx, params)
+	userCreatedDB, err := r.userQueries.CreateUser(ctx, paramsUserToCreate)
 	if err != nil {
 		return nil, err
 	}
 
 	// Cria uma nova entidade de usuário com os dados do banco de dados
-	createdUserEntity := &entity.UserEntity{
-		ID:        createdDbUser.ID,
-		Name:      createdDbUser.Name,
-		Email:     createdDbUser.Email,
-		CreatedAt: createdDbUser.CreatedAt,
-		UpdatedAt: createdDbUser.UpdatedAt,
+	userCreated := &entity.User{
+		ID:        userCreatedDB.ID,
+		Name:      userCreatedDB.Name,
+		Email:     userCreatedDB.Email,
+		CreatedAt: userCreatedDB.CreatedAt,
+		UpdatedAt: userCreatedDB.UpdatedAt,
 	}
 
-	return createdUserEntity, nil
+	return userCreated, nil
 }

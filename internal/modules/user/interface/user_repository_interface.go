@@ -1,3 +1,4 @@
+// Package interfaces define as interfaces do módulo de usuário.
 package interfaces
 
 import (
@@ -6,6 +7,7 @@ import (
 	"project/internal/modules/user/entity"
 )
 
+// UserRepository define a interface para o repositório de usuário.
 type UserRepository interface {
-	Create(ctx context.Context, user *entity.UserEntity) (*entity.UserEntity, error)
+	Create(ctx context.Context, user *entity.User) (*entity.User, error)
 }
