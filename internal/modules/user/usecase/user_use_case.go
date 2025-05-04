@@ -1,34 +1,35 @@
+// Package usecase contém todos os casos de uso do módulo de usuário.
 package usecase
 
 import (
 	"context"
 	"fmt"
 
-	userEntity "project/internal/modules/user/entity"
-	userInterfaces "project/internal/modules/user/interface"
+	"project/internal/modules/user/entity"
+	interfaces "project/internal/modules/user/interface"
 )
 
-// Garante que a struct implemente a interface esperada
-var _ userInterfaces.UserUseCase = (*userUseCase)(nil)
+// userUseCase implementa a interface UserUseCase.
+var _ interfaces.UserUseCase = (*userUseCase)(nil)
 
-// Representa o caso de uso com a dependência externa injetada
+// userUseCase representa o caso de uso com a dependência externa injetada.
 type userUseCase struct {
-	repo userInterfaces.UserRepository
+	repo interfaces.UserRepository
 }
 
-// Cria uma nova instância com a dependência necessária
-func NewUserUseCase(repo userInterfaces.UserRepository) userInterfaces.UserUseCase {
+// NewUserUseCase cria uma nova instância de userUseCase.
+func NewUserUseCase(repo interfaces.UserRepository) interfaces.UserUseCase {
 	return &userUseCase{
 		repo: repo,
 	}
 }
 
-// Executa a lógica principal com a dependência fornecida
-func (u *userUseCase) Create(ctx context.Context, user *userEntity.UserEntity) (*userEntity.UserEntity, error) {
-	createdUser, err := u.repo.Create(ctx, user)
+// Create executa a lógica principal com a dependência fornecida.
+func (u *userUseCase) Create(ctx context.Context, user *entity.User) (*entity.User, error) {
+	userCreated, err := u.repo.Create(ctx, user)
 	if err != nil {
 		return nil, fmt.Errorf("createUserUseCase: erro ao criar usuário no repositório: %w", err)
 	}
 	
-	return createdUser, nil
+	return userCreated, nil
 }

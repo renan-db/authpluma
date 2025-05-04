@@ -1,3 +1,4 @@
+// Package repository contém todos os repositórios do módulo de usuário.
 package repository
 
 /**

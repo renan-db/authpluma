@@ -1,3 +1,4 @@
+// Package route contém todas as rotas do módulo de usuário.
 package route
 
 import (
@@ -6,22 +7,22 @@ import (
 	userInterfaces "project/internal/modules/user/interface"
 )
 
-// Garante que a struct implemente a interface esperada
+// userRoute implementa a interface UserRoute.
 var _ userInterfaces.UserRoute = (*userRoute)(nil)
 
-// Representa o caso de uso com a dependência externa injetada
+// userRoute representa a estrutura que implementa a interface UserRoute.
 type userRoute struct {
 	userHandler userInterfaces.UserHandle
 }
 
-// Cria uma nova instância com a dependência necessária
+// NewUserRoute cria uma nova instância de userRoute.
 func NewUserRoute(ch userInterfaces.UserHandle) userInterfaces.UserRoute{
 	return &userRoute{
 		userHandler: ch,
 	}
 }
 
-// Executa a lógica principal com a dependência fornecida
+// Create adiciona a rota POST para criar um novo usuário.
 func (ch *userRoute) Create(group echo.Group) {
 	group.POST("/users", ch.userHandler.Create)
 }

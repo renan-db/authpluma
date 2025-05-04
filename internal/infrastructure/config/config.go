@@ -1,10 +1,11 @@
+// package config é responsável por carregar as configurações do projeto.
 package config
 
 import (
 	"github.com/spf13/viper"
 )
 
-// Mapea as variáveis de ambiente
+// Config é a estrutura que armazena as configurações do projeto.
 type Config struct {
 	DBHost     string `mapstructure:"DB_HOST"`
 	DBPort     string `mapstructure:"DB_PORT"`
@@ -14,11 +15,14 @@ type Config struct {
 	UserRepositoryType string `mapstructure:"USER_REPOSITORY_TYPE"`
 }
 
-// Carrega as variáveis de ambiente com viper
+// LoadConfig carrega as configurações do projeto.
 func LoadConfig() (*Config, error) {
 	viper.SetDefault("USER_REPOSITORY_TYPE", "postgres")
 	
+	// Carrega o arquivo de configuração
 	viper.SetConfigFile(".env")
+
+	// Carrega as variáveis de ambiente
 	viper.AutomaticEnv()
 
 	// Lê o arquivo de configuração
@@ -26,7 +30,9 @@ func LoadConfig() (*Config, error) {
 		return nil, err
 	}
 
+	// Cria uma nova instância de Config
 	config := &Config{}
+
 	// Deserializa as configurações para a estrutura Config
 	if err := viper.Unmarshal(config); err != nil {
 		return nil, err

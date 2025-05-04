@@ -1,11 +1,11 @@
 # Inclui outros Makefiles
-include makefiles/app.mk
-include makefiles/docker.mk
-include makefiles/git.mk
-include makefiles/go.mk
-include makefiles/vim.mk
-include makefiles/swagger.mk
-include makefiles/setup.mk
+include docs/makefile/app.mk
+include docs/makefile/docker.mk
+include docs/makefile/git.mk
+include docs/makefile/go.mk
+include docs/makefile/vim.mk
+include docs/makefile/swagger.mk
+include docs/makefile/setup.mk
 
 # Define todos os targets como phony (make)
 .PHONY: help
